@@ -46,6 +46,19 @@ sent and generated. Turn **cache on** to also include cache-creation and cache-r
 tokens (much larger, since the full context is re-read each turn). Both totals are
 pre-computed, so switching modes updates instantly.
 
+## Updating
+
+Claude Code shows an "update available" indicator when a newer version is
+published. To check and pull the latest at any time:
+
+```
+/plugin marketplace update
+/plugin update usage-tracker
+```
+
+Restart Claude Code for the update to take effect. Your on/off and cache settings
+are preserved across updates.
+
 ## What each segment means
 
 | Segment                  | Meaning                                                        |
