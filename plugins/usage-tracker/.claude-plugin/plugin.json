@@ -4,8 +4,7 @@
   "version": "1.2.0",
   "description": "Live model, session cost, total tokens, context-to-compact, and rate-limit usage in your statusline, with a /trackusage on/off toggle.",
   "author": {
-    "name": "Brendan Boyd",
-    "email": "brendangboyd2003@gmail.com"
+    "name": "swaub"
   },
   "license": "MIT",
   "keywords": ["statusline", "usage", "cost", "tokens", "rate-limit"]

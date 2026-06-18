@@ -1,9 +1,8 @@
 {
-  "name": "boyd-plugins",
-  "description": "Brendan's Claude Code plugins",
+  "name": "swaub",
+  "description": "swaub's Claude Code plugins",
   "owner": {
-    "name": "Brendan Boyd",
-    "email": "brendangboyd2003@gmail.com"
+    "name": "swaub"
   },
   "plugins": [
     {

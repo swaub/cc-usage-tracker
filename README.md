@@ -16,7 +16,7 @@ dependencies — works on macOS, Linux, and WSL anywhere Claude Code runs.
 
 ```
 /plugin marketplace add swaub/cc-usage-tracker
-/plugin install usage-tracker@boyd-plugins
+/plugin install usage-tracker@swaub
 /usage-tracker:trackusage on
 ```
 
