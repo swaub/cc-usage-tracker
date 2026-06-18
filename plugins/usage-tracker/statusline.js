@@ -62,7 +62,16 @@ function dim(s) {
 }
 
 const TOKEN_CACHE = path.join(os.homedir(), ".claude", ".usage-tracker-cache.json");
-const TOKEN_FORMULA = 2;
+const TOKEN_FORMULA = 3;
+
+function includeCache() {
+  try {
+    const s = JSON.parse(fs.readFileSync(STATE_FILE, "utf8"));
+    return s.cache === true;
+  } catch {
+    return false;
+  }
+}
 
 function sessionTokens(transcriptPath) {
   if (!transcriptPath) return null;
@@ -80,10 +89,12 @@ function sessionTokens(transcriptPath) {
 
   const prev = cache[transcriptPath];
   let startOffset = 0;
-  let total = 0;
+  let io = 0;
+  let all = 0;
   if (prev && prev.v === TOKEN_FORMULA && curSize >= prev.size) {
     startOffset = prev.size;
-    total = prev.total;
+    io = prev.io;
+    all = prev.all;
   }
 
   const len = curSize - startOffset;
@@ -96,7 +107,7 @@ function sessionTokens(transcriptPath) {
       fs.readSync(fd, buf, 0, len, startOffset);
       fs.closeSync(fd);
     } catch {
-      return total > 0 ? total : null;
+      return pick(io, all);
     }
     const lastNl = buf.lastIndexOf(0x0a);
     completeLen = lastNl >= 0 ? lastNl + 1 : 0;
@@ -111,16 +122,23 @@ function sessionTokens(transcriptPath) {
       }
       const u = e?.message?.usage || e?.usage;
       if (u && typeof u === "object") {
-        total += (u.input_tokens || 0) + (u.output_tokens || 0);
+        const base = (u.input_tokens || 0) + (u.output_tokens || 0);
+        io += base;
+        all += base + (u.cache_creation_input_tokens || 0) + (u.cache_read_input_tokens || 0);
       }
     }
   }
 
-  cache[transcriptPath] = { v: TOKEN_FORMULA, size: startOffset + completeLen, total };
+  cache[transcriptPath] = { v: TOKEN_FORMULA, size: startOffset + completeLen, io, all };
   try {
     fs.writeFileSync(TOKEN_CACHE, JSON.stringify(cache));
   } catch {}
 
+  return pick(io, all);
+}
+
+function pick(io, all) {
+  const total = includeCache() ? all : io;
   return total > 0 ? total : null;
 }
 

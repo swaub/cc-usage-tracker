@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- Add a **cache-token mode**: `/trackusage cache on` counts input + output + cache
+  creation + cache reads; `/trackusage cache off` (the default) counts only input +
+  output. `/trackusage cache` toggles it. Both totals are computed in a single
+  transcript pass and cached, so switching modes is instant — no re-parse.
+
 ## 1.2.0
 
 - Add current **model name** to the statusline.

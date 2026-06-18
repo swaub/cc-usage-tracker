@@ -8,8 +8,8 @@
     {
       "name": "usage-tracker",
       "source": "./plugins/usage-tracker",
-      "version": "1.2.0",
-      "description": "Live model, session cost, total tokens, context-to-compact, and rate-limit usage in your statusline, with a /trackusage on/off toggle.",
+      "version": "1.3.0",
+      "description": "Live model, session cost, total tokens, context-to-compact, and rate-limit usage in your statusline, with a /trackusage on/off toggle and a cache-token mode.",
       "keywords": ["statusline", "usage", "cost", "tokens", "rate-limit"]
     }
   ]

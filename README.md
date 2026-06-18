@@ -30,13 +30,21 @@ your next message.
 ## Toggle it any time
 
 ```
-/usage-tracker:trackusage on       # turn on
-/usage-tracker:trackusage off      # blank the statusline (stays installed)
-/usage-tracker:trackusage status   # check current state
-/usage-tracker:trackusage          # toggle
+/usage-tracker:trackusage on         # turn on
+/usage-tracker:trackusage off        # blank the statusline (stays installed)
+/usage-tracker:trackusage status     # check current state
+/usage-tracker:trackusage            # toggle on/off
+/usage-tracker:trackusage cache on   # count input + output + cache tokens
+/usage-tracker:trackusage cache off  # count only input + output (default)
+/usage-tracker:trackusage cache      # toggle the cache setting
 ```
 
 State lives in `~/.claude/usage-tracker.json`.
+
+By default the **tokens** figure counts input + output only — the work actually
+sent and generated. Turn **cache on** to also include cache-creation and cache-read
+tokens (much larger, since the full context is re-read each turn). Both totals are
+pre-computed, so switching modes updates instantly.
 
 ## What each segment means
 
